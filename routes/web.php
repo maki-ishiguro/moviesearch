@@ -17,11 +17,11 @@ Route::get('/', function(){
 Route::group(['prefix' => 'admin'], function () {
     Route::get('movie/create','Admin\MovieController@add');
     Route::post('movie/create', 'Admin\MovieController@create');
+    Route::get('movie/index','Admin\MovieController@index');
     Route::get('movie/edit','Admin\MovieController@edit');
     Route::post('movie/edit', 'Admin\MovieController@update');
     Route::get('movie/delete', 'Admin\MovieController@delete');
     
-    Route::get('search/create','Admin\SearchController@add');
-    Route::post('search/create', 'Admin\SearchController@create');
+    
     
 });

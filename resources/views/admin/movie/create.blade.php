@@ -9,6 +9,14 @@
             <div class="col-md-8 mx-auto">
                 <h2>映画の登録</h2>
                 <form action="{{ action('Admin\MovieController@create') }}" method="post" enctype="multipart/form-data">
+                    //validation
+                    @if (content($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                        </ul>
+                    @endif
+                    
                     {{ csrf_field() }}
                     <div class="form-group row">
                         <label class="col-md-2" for="title">タイトル</label>
