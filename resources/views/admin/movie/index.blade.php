@@ -6,11 +6,16 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
-                <h2>映画の検索</h2>
-                <form action="{{ action('Admin\MovieController@index') }}" method="post" enctype="multipart/form-data">
+            <h2>映画の検索</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                 <a href="{{ action('Admin\MovieController@add') }}" role="button" class="btn btn-primary">登録画面へ</a>
+            </div>
+            <div class="col-md-8">
+                <form action="{{ action('Admin\MovieController@index') }}" method="get">
                     {{ csrf_field() }}
-                    <div class="form-group">
+                    <div class="form-group row">
                         <input type="submit" value="五十音順">
                     </div>
                     <div class="form-group row">
@@ -32,11 +37,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="登録画面へ">
-                    </div>
+                    <div class="row">
+                        <div class="list-movies col-md-12 mx-auto">
+                            <div class="row">
+                                <table class="table table_dark">
+                                    <thead>
+                                        <tr>
+                                            <th width="50%">画像</th>
+                                            <th width="20%">タイトル</th>
+                                            <th width="10%">ジャンル</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($posts as $movies)
+                                        <tr>
+                                            <th>{{ $movies->image_path }}</th>
+                                            <td>{{ $movies->title }}</td>
+                                            
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                 </form>
             </div>
-        </div>
+        
     </div>
 @endsection

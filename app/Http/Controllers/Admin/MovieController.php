@@ -10,8 +10,9 @@ use App\Movie;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+       
         return view('admin.movie.index');
     }
     
@@ -32,6 +33,9 @@ class MovieController extends Controller
         
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
+        // フォームから送信されてきたimageを削除する
+        unset($form['image']);
+
         
         //データベースに保存する
         $movie->fill($form);
@@ -40,14 +44,28 @@ class MovieController extends Controller
         return redirect('admin/movie/create');
     }
     
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('admin.movie.edit');
+        //Movies Modelからデータを取得する
+        $movie = Movies::find($request->id);
+        if (empty($movie)) {
+            abort(404);
+        }
+        return view('admin.movie.edit', ['movies_form' => $movie]);
     }
     
-    public function update()
+    public function update(Request $request)
     {
-        return redirect('admin/movie/edit');
+        //Movies Modelからデータを取得する
+        $movie = Movies::find($request->id);
+        //送信されてきたフォームデータを格納する、１６の画像はいるか？
+        $movies_form = $request->all();
+        unset($movies_form['_token']);
+        
+        //該当するデータを上書きして保存する
+        $movie->fill($movies_form)->save();
+        
+        return redirect('admin/movie');
     }
     
     public function delete()
