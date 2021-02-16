@@ -38,30 +38,35 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="list-movies col-md-12 mx-auto">
+                        <div class="admin-movies col-md-12 mx-auto">
                             <div class="row">
                                 <table class="table table_dark">
                                     <thead>
                                         <tr>
-                                            <th width="50%">画像</th>
-                                            <th width="20%">タイトル</th>
-                                            <th width="10%">ジャンル</th>
+                                            <th width="30%">タイトル</th>
+                                            <th width="30%">よみかな</th>
+                                            <th width="30%">ジャンル</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($posts as $movies)
+                                        @foreach($movies as $movies)
                                         <tr>
-                                            <th>{{ $movies->image_path }}</th>
-                                            <td>{{ $movies->title }}</td>
-                                            
+                                            <rd>{{ $movies->title }}</rd>
+                                            <rd>{{ $movies->kana }}</rd>
+                                            <td>
+                                                @foreach ($movies->genre as $genre){
+                                                echo
+                                                
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
-        
+        </div>
     </div>
 @endsection

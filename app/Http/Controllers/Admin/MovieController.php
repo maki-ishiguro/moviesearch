@@ -12,8 +12,8 @@ class MovieController extends Controller
 {
     public function index(Request $request)
     {
-       
-        return view('admin.movie.index');
+        $movies = Movie::all();
+        return view('admin.movie.index', ['movies' => $movies]);
     }
     
     public function add()
@@ -47,7 +47,7 @@ class MovieController extends Controller
     public function edit(Request $request)
     {
         //Movies Modelからデータを取得する
-        $movie = Movies::find($request->id);
+        $movie = Movie::find($request->id);
         if (empty($movie)) {
             abort(404);
         }
